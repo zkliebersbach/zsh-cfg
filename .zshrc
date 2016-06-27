@@ -7,7 +7,7 @@ autoload -U compinit
 compinit
 
 autoload -U colors && colors
-PROMPT="%{$fg_bold[cyan]%}%n%{%b$reset_color%}@%m %# "
+PROMPT="%{$fg_bold[cyan]%}%n%{$reset_color%}@%m %{$fg_bold[white]%}%#%{$reset_color%} "
 RPROMPT="%~ %T"
 
 setopt AUTO_CD
