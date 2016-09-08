@@ -1,14 +1,19 @@
+# source configuration file
+if [[ -r ~/.zshcfg ]]; then
+	source ~/.zshcfg
+fi
+
 HISTFILE=~/.zshhistory
 SAVEHIST=16384
 setopt APPEND_HISTORY
-setopt SHARE_HISTORY
+setopt SHARE_HISTORY # share history amongst all active sessions
 
-autoload -U compinit
-compinit
+autoload -U compinit && compinit # enable completion
+setopt COMPLETE_ALIASES # complete aliases
 
-autoload -U colors && colors
-PROMPT='%(?..[%B%F{red}%?%b%f] )%B%F{cyan}%n%b%f@%m %# '
-setopt PROMPTSUBST # enable prompt substitution
+autoload -U colors && colors # enable colors
+PROMPT='%(?..[%B%F{red}%?%b%f] )%B%F{$ZSH_CFG_COLOR}%n%b%f@%m %# '
+setopt PROMPT_SUBST # enable prompt substitution
 ZLE_RPROMPT_INDENT=0 # disable space after RPROMPT
 # load git-prompt.sh to show current branch
 local SCRIPT_GIT_PROMPT=/usr/share/git-core/contrib/completion/git-prompt.sh
@@ -23,9 +28,10 @@ else
 	RPROMPT='%1~ %T'
 fi
 
-setopt AUTO_CD
-setopt CORRECTALL
+setopt AUTO_CD # if a command can't be executed and is a path, cd to it
+setopt CORRECT_ALL # try to correct spelling of all arguments in a line
 
+# source aliases file
 if [[ -r ~/.zshalias ]]; then
 	source ~/.zshalias
 fi
