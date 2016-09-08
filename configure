@@ -1,0 +1,59 @@
+#!/bin/zsh
+set -e
+autoload -Uz colors && colors
+
+echo_center () {
+	# prints text to the center of the console
+	local cols=$(tput cols)
+	local pad=$((($cols - ${#1}) / 2))
+	repeat $pad printf ${2:-" "}
+	printf "$fg_bold[$3]%s$reset_color" $1
+	repeat $pad printf ${2:-" "}
+	printf "\n"
+}
+echo_color () {
+	# prints color name in color
+	echo -n "$fg_bold[$1]$1$reset_color"
+}
+
+# print banner
+echo_center " zsh-cfg " "=" magenta
+
+zsh_cfg_prompt_color () {
+	# ask user for the prompt color
+	local ZSH_COLORS=(black red green yellow blue magenta cyan white)
+	echo -n "Colors:"
+	for c in $ZSH_COLORS; echo -n " $(echo_color $c)"
+	echo
+	echo -n "Choose a prompt color: [$(echo_color cyan)] "
+	read ZSH_CFG_COLOR
+
+	ZSH_CFG_COLOR=${ZSH_CFG_COLOR:-cyan} # set default value
+	# check that selected color is valid
+	if [[ -n ${ZSH_COLORS[(r)$ZSH_CFG_COLOR]} ]]; then
+		echo "You chose $(echo_color $ZSH_CFG_COLOR)."
+	else
+		echo "Invalid color."
+		zsh_cfg_prompt_color
+	fi
+}
+zsh_cfg_prompt_color
+
+# write configuration
+zsh_cfg_prompt_write () {
+	echo -n "Write configuration file? [Y/n] "
+	read ZSH_CFG_WRITE
+
+	ZSH_CFG_WRITE=${ZSH_CFG_WRITE:-y}
+	if [[ $ZSH_CFG_WRITE =~ ^[Yy]$ ]]; then
+		echo "ZSH_CFG_COLOR=$ZSH_CFG_COLOR" >> ~/.zshcfg
+		echo "Done."
+	elif [[ $ZSH_CFG_WRITE =~ ^[Nn]$ ]]; then
+		echo "Aborting."
+		return 1
+	else
+		echo "Invalid repsonse."
+		zsh_cfg_prompt_write
+	fi
+}
+zsh_cfg_prompt_write
