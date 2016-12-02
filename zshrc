@@ -35,3 +35,6 @@ setopt CORRECT_ALL # try to correct spelling of all arguments in a line
 if [[ -r ~/.zshalias ]]; then
 	source ~/.zshalias
 fi
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
