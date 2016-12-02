@@ -1,10 +1,12 @@
 DIR:=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-ZSH=.zshalias .zshenv .zshrc
+ZSH=zshalias zshenv zshrc
 ZSHFILES=$(patsubst %,$(DIR)/%,$(ZSH))
-ZSHLINKS=$(patsubst %,$(HOME)/%,$(ZSH))
+ZSHLINKS=$(patsubst %,$(HOME)/.%,$(ZSH))
+
+.PHONY: install uninstall
 
 install: $(ZSHFILES)
-	ln -s $(ZSHFILES) $(HOME)
+	$(foreach file,$(ZSH),ln -s $(DIR)/$(file) $(HOME)/.$(file);)
 
 uninstall: $(ZSHLINKS)
-	rm $(ZSHLINKS)
+	$(foreach link,$(ZSHLINKS),unlink $(link);)
