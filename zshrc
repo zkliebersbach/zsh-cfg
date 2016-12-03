@@ -16,7 +16,7 @@ PROMPT='%(?..[%B%F{red}%?%b%f] )%B%F{$ZSH_CFG_COLOR}%n%b%f@%m %# '
 setopt PROMPT_SUBST # enable prompt substitution
 ZLE_RPROMPT_INDENT=0 # disable space after RPROMPT
 # load git-prompt.sh to show current branch
-local SCRIPT_GIT_PROMPT=/usr/share/git-core/contrib/completion/git-prompt.sh
+local SCRIPT_GIT_PROMPT=~/.local/share/git-core/contrib/completion/git-prompt.sh
 if [[ -r $SCRIPT_GIT_PROMPT ]]; then
 	source $SCRIPT_GIT_PROMPT
 	GIT_PS1_SHOWDIRTYSTATE=true # show unstaged (*) and staged (+) changes
