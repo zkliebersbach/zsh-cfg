@@ -38,3 +38,6 @@ fi
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
+# cd to home if initial pwd is root
+if [[ $PWD == / ]]; then cd; fi
