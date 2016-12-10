@@ -11,7 +11,7 @@ fetch-deps:
 	wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
 		-O $(GITDIR)/git-prompt.sh
 
-install: build $(ZSHFILES)
+install: $(ZSHFILES)
 	$(foreach file,$(ZSH),ln -s $(DIR)/$(file) $(HOME)/.$(file);)
 
 uninstall: $(ZSHLINKS)
