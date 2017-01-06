@@ -8,13 +8,14 @@ SAVEHIST=16384
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY # share history amongst all active sessions
 
+autoload -U promptinit && promptinit && prompt gentoo # enable prompt
 autoload -U compinit && compinit # enable completion
 setopt COMPLETE_ALIASES # complete aliases
 
 autoload -U colors && colors # enable colors
 PROMPT='%(?..[%B%F{red}%?%b%f] )%B%F{$ZSH_CFG_COLOR}%n%b%f@%m %# '
 setopt PROMPT_SUBST # enable prompt substitution
-ZLE_RPROMPT_INDENT=0 # disable space after RPROMPT
+ZLE_RPROMPT_INDENT=-1 # disable space after RPROMPT
 # load git-prompt.sh to show current branch
 local SCRIPT_GIT_PROMPT=~/.local/share/git-core/contrib/completion/git-prompt.sh
 if [[ -r $SCRIPT_GIT_PROMPT ]]; then
@@ -29,7 +30,6 @@ else
 fi
 
 setopt AUTO_CD # if a command can't be executed and is a path, cd to it
-setopt CORRECT_ALL # try to correct spelling of all arguments in a line
 
 # source aliases file
 if [[ -r ~/.zshalias ]]; then
