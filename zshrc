@@ -8,7 +8,6 @@ SAVEHIST=16384
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY # share history amongst all active sessions
 
-autoload -U promptinit && promptinit && prompt gentoo # enable prompt
 autoload -U compinit && compinit # enable completion
 setopt COMPLETE_ALIASES # complete aliases
 
