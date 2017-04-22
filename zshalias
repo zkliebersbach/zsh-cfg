@@ -6,3 +6,11 @@ alias rtitle="echo -ne \"\033]0;\007\""
 mkcdir () {
 	mkdir "$@" && cd "${@[-1]}"
 }
+torcheck () {
+	curl -# https://check.torproject.org | grep "class=\"not\"" >/dev/null
+	if [[ $? -eq 0 ]]; then
+		echo "Tor is enabled in this shell."
+	else
+		echo "Tor is disabled in this shell."
+	fi
+}
