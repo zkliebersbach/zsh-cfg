@@ -1,3 +1,9 @@
+source-safe () {
+	if [[ -r "$1" ]]; then
+		source "$1"
+	fi
+}
+
 typeset -U path
 path=(~/bin ~/.local/bin $path)
 

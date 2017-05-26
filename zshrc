@@ -1,9 +1,3 @@
-source-safe () {
-	if [[ -r "$1" ]]; then
-		source "$1"
-	fi
-}
-
 # source configuration file
 source-safe ~/.zshcfg
 
