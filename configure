@@ -39,6 +39,25 @@ zsh_cfg_prompt_color () {
 }
 zsh_cfg_prompt_color
 
+zsh_cfg_prompt_extras () {
+	# ask user whether to install extras
+	echo -n "Install extras? [Y/n] "
+	read ZSH_CFG_EXTRAS
+
+	ZSH_CFG_EXTRAS=${ZSH_CFG_EXTRAS:-y}
+	if [[ $ZSH_CFG_EXTRAS =~ ^[Yy]$ ]]; then
+		echo "Installing transfer.sh alias..."
+	    curl -# https://gist.githubusercontent.com/nl5887/a511f172d3fb3cd0e42d/raw/d2f8a07aca44aa612b6844d8d5e53a05f5da3420/transfer.sh >> ~/.zshalias.local
+		echo "Done."
+	elif [[ $ZSH_CFG_EXTRAS =~ ^[Nn]$ ]]; then
+		echo "Skipping extras."
+	else
+		echo "Invalid repsonse."
+		zsh_cfg_prompt_write
+	fi
+}
+zsh_cfg_prompt_extras
+
 # write configuration
 zsh_cfg_prompt_write () {
 	echo -n "Write configuration file? [Y/n] "
