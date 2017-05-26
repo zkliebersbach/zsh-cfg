@@ -36,4 +36,6 @@ if [[ -r ~/.zshalias ]]; then
 fi
 
 # added by travis gem
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+if [[ -r ~/.travis/travis.sh ]]; then
+	source ~/.travis/travis.sh
+fi
