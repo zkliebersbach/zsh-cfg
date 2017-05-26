@@ -1,7 +1,11 @@
+source-safe () {
+	if [[ -r "$1" ]]; then
+		source "$1"
+	fi
+}
+
 # source configuration file
-if [[ -r ~/.zshcfg ]]; then
-	source ~/.zshcfg
-fi
+source-safe ~/.zshcfg
 
 HISTFILE=~/.zshhistory
 SAVEHIST=16384
@@ -31,11 +35,7 @@ fi
 setopt AUTO_CD # if a command can't be executed and is a path, cd to it
 
 # source aliases file
-if [[ -r ~/.zshalias ]]; then
-	source ~/.zshalias
-fi
+source-safe ~/.zshalias
 
 # added by travis gem
-if [[ -r ~/.travis/travis.sh ]]; then
-	source ~/.travis/travis.sh
-fi
+source-safe ~/.travis/travis.sh

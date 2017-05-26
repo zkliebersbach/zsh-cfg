@@ -7,6 +7,4 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export SDL_VIDEO_FULLSCREEN_HEAD=1
 
 # source local env file
-if [[ -r ~/.zshenv.local ]]; then
-	source ~/.zshenv.local
-fi
+source-safe ~/.zshenv.local
