@@ -15,5 +15,5 @@ fetch-deps:
 install: fetch-deps $(ZSHFILES)
 	$(foreach file,$(ZSH),ln -s $(DIR)/$(file) $(HOME)/.$(file);)
 
-uninstall: $(ZSHLINKS)
+uninstall:
 	$(foreach link,$(ZSHLINKS),unlink $(link);)
