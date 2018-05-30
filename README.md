@@ -1,2 +1,3 @@
 # zsh-cfg
-Zsh configuration files.
+
+ZSH configuration files.
