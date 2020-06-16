@@ -1,6 +1,7 @@
 alias ls="ls --color --group-directories-first"
 alias ll="ls -Ahls"
 alias bd="byobu-tmux detach"
+alias restart-audio="pulseaudio -k && sudo alsa force-reload"
 
 mkcdir () {
 	mkdir "$@" && cd "${@[-1]}"
