@@ -6,15 +6,18 @@ SAVEHIST=16384
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY # share history amongst all active sessions
 
+CFGDIR=$HOME/.local/share/zsh-cfg
 autoload -U compinit && compinit # enable completion
 setopt COMPLETE_ALIASES # complete aliases
+autoload bashcompinit && bashcompinit # enable bash completions
+source $CFGDIR/wp-completion.bash # enable wp-cli completion
 
 autoload -U colors && colors # enable colors
 PROMPT='%(?..[%B%F{red}%?%b%f] )%B%F{$ZSH_CFG_COLOR}%n%b%f@%m %# '
 setopt PROMPT_SUBST # enable prompt substitution
 ZLE_RPROMPT_INDENT=-1 # disable space after RPROMPT
 # load git-prompt.sh to show current branch
-local SCRIPT_GIT_PROMPT=~/.local/share/git-core/contrib/completion/git-prompt.sh
+local SCRIPT_GIT_PROMPT=$CFGDIR/git-prompt.sh
 if [[ -r $SCRIPT_GIT_PROMPT ]]; then
 	source $SCRIPT_GIT_PROMPT
 	GIT_PS1_SHOWDIRTYSTATE=true # show unstaged (*) and staged (+) changes
