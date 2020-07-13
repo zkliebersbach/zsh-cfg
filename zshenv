@@ -5,7 +5,7 @@ source-safe () {
 }
 
 typeset -U path
-path=(~/bin ~/.local/bin $path)
+path=(~/bin ~/.local/bin ~/.config/composer/vendor/bin $path)
 
 export EDITOR=nano
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
