@@ -9,8 +9,6 @@ CFGDIR=$(HOME)/.local/share/zsh-cfg
 
 fetch-deps:
 	mkdir -p $(CFGDIR)
-	wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
-		-O $(CFGDIR)/git-prompt.sh
 	wget https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash \
 		-O $(CFGDIR)/wp-completion.bash
 
