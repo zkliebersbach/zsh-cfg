@@ -17,6 +17,13 @@ torcheck () {
 homestead () {
 	( cd ~/Homestead && vagrant $* )
 }
+minio () {
+	if [[ -z $1 ]]; then
+		echo "Please specify a directory for Minio data."
+	else
+		docker run -p 9000:9000 -v $(readlink -f $1):/data  minio/minio server /data
+	fi
+}
 
 # source local alias file
 source-safe ~/.zshalias.local
