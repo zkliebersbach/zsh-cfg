@@ -1,7 +1,6 @@
 alias ls="ls --color --group-directories-first"
 alias ll="ls -Ahls"
 alias bd="byobu-tmux detach"
-alias restart-audio="pulseaudio -k && sudo alsa force-reload"
 
 mkcdir () {
 	mkdir "$@" && cd "${@[-1]}"
@@ -22,6 +21,18 @@ minio () {
 		echo "Please specify a directory for Minio data."
 	else
 		docker run -p 9000:9000 -v $(readlink -f $1):/data  minio/minio server /data
+	fi
+}
+neo4j () {
+	if [[ -z $1 ]]; then
+		echo "Please specify a directory for Neo4j."
+	else
+		local dir=$(readlink -f $1)
+		mkdir -p $dir/conf && mkdir -p $dir/data && mkdir -p $dir/plugins && mkdir -p $dir/import
+		docker run --user=$(id -u):$(id -g) \
+			-p 7473:7473 -p 7474:7474 -p 7687:7687 \
+			-v $dir/conf:/conf -v $dir/data:/data -v $dir/plugins:/plugins -v $dir/import:/var/lib/neo4j/import \
+			--env NEO4J_AUTH=neo4j/test --env NEO4J_ACCEPT_LICENSE_AGREEMENT=yes --env NEO4JLABS_PLUGINS=\[\"apoc\"\] neo4j:community
 	fi
 }
 
